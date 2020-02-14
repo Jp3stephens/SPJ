@@ -1,0 +1,54 @@
+Guidelines for how we are going to do this:
+
+
+Main Goals: 
+
+- Display information about companies, people in these companies, locations of people & company, telephone numbers, email addresses, links to social medias of these people, in a format that SPJ employees can easily read and interact with / update. 
+
+- Possible ideas for UI: 
+	- We could make a postgressSQL database and display this with python Flask on a website
+	- We could make an api that connects to our data and make a UI interface that allows SPJ employees to search for some generic query (i.e, 'company name', or 'location') and results will be displayed that are close to the query or match. 
+	- We could do something else...
+
+
+- Scraping:
+	- Probably going to use SCRAPY as this allows us to write multiple methods to scrape different websites
+	- Should probably use selenium engine for javascript heavy sites (such as linkedIn) to pull information. This might be slightly more complicated to use
+	- Could use something else (BS4 makes text manipulation a little easier, but not as powerful at crawling as SCRAPY)
+	- could use SCRAPY and BS4 in tandem
+
+
+- What to do with Data
+	- for now we should focus on scraping as much data as possible and storing it in local python data structures. 
+	- We should however keep in mind where and how we will transfer this data to another interface / database tho so we don't screw ourselves over in a month or so...
+
+
+- Code Style
+	- VERY VERY important that we write clean, easily understandable code. 
+	- Inevitably this is going to be alot of lines, and if we start getting confused its going to snowball and screw us down the road
+	- Write a precondition and postcondition for every function
+	- Write an invariant for every class
+	- Akshit, if you don't know what those are ^ look them up. 
+
+- Data structures needed
+	- Most likely we will categorize things with a hashmap (i.e. dictionary in python)
+	- Company name can be value and keys should be objects of class People
+	- People class should contain:
+		- Name of person
+		- Company they work for ?
+		- Location of person
+		- Address (if available)
+		- Email (if available)
+		- Phone number (if available)
+		- Social media accounts (might be a list or dictionary)
+	
+
+
+
+- Main objective right now (February 13, 2020) is to finish filling out this .txt file with complete and detailed specifications of everything we need to do. 
+
+- We need to write the most generic, templated code that we can to allow the maximal amount of code reuse. 
+
+- Let's do this :)
+
+
