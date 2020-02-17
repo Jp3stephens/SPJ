@@ -1,6 +1,19 @@
 Guidelines for how we are going to do this:
 
 
+POSSIBLE SCRAPING METHODS: 
+	- CrunchBase API (NEED TO GET PRO VERSION) THIS COST $$. TALK TO PJ AND BEN ABOUT PAYING FOR THE API ACCESS
+	- Using scrapy for scraping
+	- 
+
+GOALS: 
+Goals: 
+- identify customer page
+- extract customer name
+- extract testimonials (if applicable)
+- extract name of customers (if applicable)
+
+
 Main Goals: 
 
 - Display information about companies, people in these companies, locations of people & company, telephone numbers, email addresses, links to social medias of these people, in a format that SPJ employees can easily read and interact with / update. 
