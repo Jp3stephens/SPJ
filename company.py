@@ -6,7 +6,7 @@ class Company:
         self.company_name = company_name
         self.employees = employees
         self.location = location
-        self.company_telephone
+        self.company_telephone = company_telephone
         self.social_media = social_media
 
 
@@ -33,17 +33,6 @@ class Company:
         for person in self.employees:
             print(person.name)
 
-    
 
 
-Google = Company("Google")
-Jack = People("Jack", "Google", "San Diego")
-James = People("James","Google", "San Diego")
-Rick = People("Rick", "Google", "San Diego")
-Guy = People("Guy", "Google", "San Diego")
 
-
-Google.addMultiplePeople([Jack, James, Rick, Guy])
-
-
-Google.displayEmployeeNames()
