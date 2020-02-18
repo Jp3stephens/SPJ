@@ -2,7 +2,7 @@ from people import People #provide the people class
 
 
 class Company:
-    def __init__(self, company_name, employees = [], location = "", company_telephone = "", social_media = [], website = ""):
+    def __init__(self, company_name, employees = [], location = "", company_telephone = "", social_media = {}, website = ""):
         self.company_name = company_name
         self.employees = employees
         self.location = location
@@ -29,8 +29,8 @@ class Company:
     def addTelephone(self, company_telephone):
         self.company_telephone = company_telephone
 
-    def addSocialMedia(selfs, social_media):    #THIS NEEDS TO BE CHANGED. SHOULD SOCIAL MEDIA BE ITS OWN CLASS?? PROB
-        self.social_media = social_media
+    def addSocialMedia(self, key, value):    #THIS NEEDS TO BE CHANGED. SHOULD SOCIAL MEDIA BE ITS OWN CLASS?? PROB
+        self.social_media[key] = value
 
 
     def displayEmployeeNames(self): #Display people objects in company
@@ -53,6 +53,7 @@ class Company:
         if (self.company_telephone):
             print("Telephone number: ", self.telephone)
         if (self.social_media):
-            for media in self.social_media:
-                print(media)
+            for key, value in self.social_media.items():
+                print(key, ":", value)
+
         
