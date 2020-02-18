@@ -43,6 +43,7 @@ def findCompanyTwitter(companyList):
 				company.addWebsite(acomp.url)
 				print("Website being added: ", acomp.url)
 				company.addSocialMedia("Twitter", "@"+acomp.screen_name)
+				company.addLocation(acomp.location)
 				company.printCompanyInfo()
 				companies_Without_Twitter.remove(company.company_name)
 				continue 
@@ -65,6 +66,7 @@ def findBCompanyTwitter(company):
 			print("Valid B company")
 			company.addSocialMedia("Twitter", "@"+bcomp.screen_name)
 			company.addWebsite(bcomp.url)
+			company.addLocation(bcomp.location)
 			company.printCompanyInfo()
 			return True
 		else: 
