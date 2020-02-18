@@ -2,18 +2,21 @@ from people import People #provide the people class
 
 
 class Company:
-    def __init__(self, company_name, employees = [], location = "", company_telephone = "", social_media = []):
+    def __init__(self, company_name, employees = [], location = "", company_telephone = "", social_media = [], website = ""):
         self.company_name = company_name
         self.employees = employees
         self.location = location
         self.company_telephone = company_telephone
         self.social_media = social_media
-
+	self.website = website
 
 
 
     def addPerson(self, person: People):
         self.employees.append(person)
+
+    def addWebsite(self,  website):
+	self.website = website
 
     def addMultiplePeople(self, people: [People]):
         for person in people:
