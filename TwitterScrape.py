@@ -43,6 +43,7 @@ for company in companyList:
 			print("Valid company")
 			company.addWebsite(acomp.url)
 			print("Website being added: ", acomp.url)
+			company.printCompanyInfo()
 		else:
 			print("phony company")
 

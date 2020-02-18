@@ -39,4 +39,20 @@ class Company:
 
 
 
+    def printCompanyInfo(self):
+        print("Company: ", self.company_name)
+        if (self.employees):
+            print("employees")
+            for employee in self.employees:
+                print(employe)
+        if (self.website):
+            print("Website: ", self.website)
+        if (self.location):
+            print("Location: ", self.location)
 
+        if (self.company_telephone):
+            print("Telephone number: ", self.telephone)
+        if (self.social_media):
+            for media in self.social_media:
+                print(media)
+        
