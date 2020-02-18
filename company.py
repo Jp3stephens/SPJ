@@ -8,15 +8,16 @@ class Company:
         self.location = location
         self.company_telephone = company_telephone
         self.social_media = social_media
-	self.website = website
+        self.website = website
 
 
 
     def addPerson(self, person: People):
         self.employees.append(person)
 
-    def addWebsite(self,  website):
-	self.website = website
+    def addWebsite(self, website):
+        self.website = website
+        print("test")
 
     def addMultiplePeople(self, people: [People]):
         for person in people:
