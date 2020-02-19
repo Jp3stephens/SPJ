@@ -33,7 +33,7 @@ def checkIfSubstring(string, sub_str):
 
 
 def findCompanyTwitter(companyList):
-	companies_Without_Twitter = company_Text_List
+	companies_Without_Twitter = companyList
 	for company in companyList:
 		try:
 			acomp = api.get_user(id=company.company_name.replace(" ", ""))
@@ -45,10 +45,10 @@ def findCompanyTwitter(companyList):
 				company.addSocialMedia("Twitter", "@"+acomp.screen_name)
 				company.addLocation(acomp.location)
 				company.printCompanyInfo()
-				companies_Without_Twitter.remove(company.company_name)
+				companies_Without_Twitter.remove(company)
 				continue 
 			elif(findBCompanyTwitter(company)):
-				companies_Without_Twitter.remove(company.company_name)
+				companies_Without_Twitter.remove(company)
 				
 			else:
 				print("phony company")
@@ -57,7 +57,7 @@ def findCompanyTwitter(companyList):
 		except BaseException as e: 
 			print('failed on_status,', str(e))
 			time.sleep(2)
-	print("Companies without Twitter: ", companies_Without_Twitter)
+	return companies_Without_Twitter
 
 def findBCompanyTwitter(company):
 	try: 
@@ -76,9 +76,48 @@ def findBCompanyTwitter(company):
 		return False
 		time.sleep(2)
 
+
+
+def findCompaniesWithSearch(company_To_Search): 
+	company = api.search_users(company_To_Search.company_name)
+	for user in company: 
+		print(user.screen_name, ", ", user.name)
+		if checkIfSubstring(user.name.replace(" ", ""), company_To_Search.company_name.replace(" ", "")):
+			company_To_Search.addWebsite(user.url)
+			company_To_Search.addSocialMedia("Twitter", "@" + user.screen_name)
+			company_To_Search.addLocation(user.location)
+			company_To_Search.printCompanyInfo()
+			return True	
+		elif checkIfSubstring(user.name.replace(" ", ""), company_To_Search.company_name.replace(" ", "")+"security"):
+			company_To_Search.addWebsite(user.url)
+			company_To_Search.addSocialMedia("Twitter", "@" + user.screen_name)
+			company_To_Search.addLocation(user.location)
+			company_To_Search.printCompanyInfo()
+			return True
+		else:
+			continue
+	return False
+
+
+
+
+def getRemainderOfCompanies(companies_Without_Twitter):
+	for company in companies_Without_Twitter:
+		if (findCompaniesWithSearch(company)):
+			companies_Without_Twitter.remove(company)
+		else:
+			continue
+	return companies_Without_Twitter
+
+
 	
+def getAllCompanies(companyList):
+	companiesNotFound = findCompanyTwitter(companyList)
+	print("Getting remainder companies")
+	companiesNotFound = getRemainderOfCompanies(companiesNotFound)
+	if companiesNotFound:
+		return companiesNotFound
+	else:
+		return
 
-
-
-findCompanyTwitter(companyList)
-
+companyNotFoundList = getAllCompanies(companyList)
