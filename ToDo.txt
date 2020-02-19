@@ -2,8 +2,8 @@ To Do:
 
 	February 18 2020
 
-	1) Populate the rest of company objects (ones not found in twitterScrape.py) with Twitter data. One way to do this is to use twitter search function in TWeepy and check screen_name against company name. 
-
+1) Tweak TwitterScrape  search  function  to ensure 100% accuracy
+	-  Also figure out  how to populate the 'not found' companies with Twitter accounts / how to find  these companies on Twitter
 	2) Scrape top 100 tweets (liked, retweeted) where company handle or hashtag is mentioned. Feed to Akshit's reviewModel (to determine if valid review model or not) and populate Company.reviews with this data. 
 		- Add reviews attribute and method to add (addReviews). reviews should probably be a list containing strings (of the tweets). 
 
