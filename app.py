@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -47,6 +47,25 @@ def get_by_name(company_name_):
 	except Exception as e:
 		return(str(e))
 	
+@app.route("/add/form", methods=['GET', 'POST'])
+def add_company_form(): 
+	if request.method == 'POST':
+		company_name=request.form.get('company_name')
+		website = request.form.get('website')
+		location = request.form.get('location')
+		try: 
+			company = Company(
+				company_name = company_name, 
+				location = location, 
+				website = website
+				)
+			db.session.add(company)
+			db.session.commit()
+			return "Company added. Company name = {}".format(company.company_name)
+		except Exception as e: 
+			return(str(e))
+	return render_template("getdata.html")
+
 
 if __name__ == '__main__': 
 	app.run()
