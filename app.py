@@ -9,13 +9,42 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 from company import Company
+from companyList import companyList
+from TwitterScrape import getAllCompanies
 
 @app.route("/")
 def hello(): 
 	return "Hello World!"
 
+
+@app.route("/getTwitterScrape")
+def add_company_info_from_TwitterScrape():
+	companiesNotFound = getAllCompanies(companyList)
+	for company in companyList:
+		if company in companiesNotFound:
+			continue
+		try:
+			print("Printing company,", company.company_name) 
+			company = Company(
+				company_name = company.company_name, 
+				location = company.location,
+				website = company.website
+				)
+			db.session.add(company)
+	
+		#	return "Company added from TwitterScrape. Company name = {}".format(company.company_name)
+		except Exception as e: 
+			return(str(e))
+	db.session.commit()
+	return "Company added from TwitterScrape. Company name = {}".format(company.company_name)
+
+
+
+
+
 @app.route("/addCompany")
 def add_Company():
+	#add_company_info_from_TwitterScrape(companyList)
 	company_name=request.args.get('company_name')
 	location=request.args.get('location')
 	website=request.args.get('website')
@@ -34,7 +63,7 @@ def add_Company():
 @app.route('/getall')
 def get_all_companies(): 
 	try: 
-		companies = companies.query.all()
+		companies = Company.query.all()
 		return jsonify([e.serialize() for e in companies])
 	except Exception as e: 
 		return(str(e))
@@ -70,4 +99,4 @@ def add_company_form():
 if __name__ == '__main__': 
 	app.run()
 
-
+		
