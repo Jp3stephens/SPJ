@@ -10,7 +10,7 @@ db = SQLAlchemy(app)
 
 from company import Company
 from companyList import companyList
-from TwitterScrape import getAllCompanies
+from TwitterScrape import getAllCompanies, updatedCompanyObjectList
 
 @app.route("/")
 def hello(): 
@@ -19,10 +19,9 @@ def hello():
 
 @app.route("/getTwitterScrape")
 def add_company_info_from_TwitterScrape():
-	companiesNotFound = getAllCompanies(companyList)
-	for company in companyList:
-		if company in companiesNotFound:
-			continue
+	companiesNotFound = getAllCompanies(companyList, updatedCompanyObjectList)
+	for company in updatedCompanyObjectList:
+		
 		try:
 			print("Printing company,", company.company_name) 
 			company = Company(
@@ -30,13 +29,13 @@ def add_company_info_from_TwitterScrape():
 				location = company.location,
 				website = company.website
 				)
+			
 			db.session.add(company)
-	
+			db.session.commit()	
 		#	return "Company added from TwitterScrape. Company name = {}".format(company.company_name)
 		except Exception as e: 
 			return(str(e))
-	db.session.commit()
-	return "Company added from TwitterScrape. Company name = {}".format(company.company_name)
+	return "Company added from TwitterScrape. Company name = {}, company website = {}, company location = {}".format(company.company_name, company.website, company.location)
 
 
 

@@ -17,6 +17,7 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api  = tweepy.API(auth,  wait_on_rate_limit=True)
 
+updatedCompanyObjectList = []
 
 def checkIfSubstring(string, sub_str):
 	if  (len(sub_str) >  len(string)):
@@ -32,7 +33,7 @@ def checkIfSubstring(string, sub_str):
 
 
 
-def findCompanyTwitter(companyList):
+def findCompanyTwitter(companyList, updatedCompanyObjectList):
 	companies_Without_Twitter = companyList
 	for company in companyList:
 		try:
@@ -45,9 +46,11 @@ def findCompanyTwitter(companyList):
 				company.addSocialMedia("Twitter", "@"+acomp.screen_name)
 				company.addLocation(acomp.location)
 				company.printCompanyInfo()
+				updatedCompanyObjectList.append(company)
 				companies_Without_Twitter.remove(company)
 				continue 
 			elif(findBCompanyTwitter(company)):
+				updatedCompanyObjectList.append(company)
 				companies_Without_Twitter.remove(company)
 				
 			else:
@@ -101,9 +104,10 @@ def findCompaniesWithSearch(company_To_Search):
 
 
 
-def getRemainderOfCompanies(companies_Without_Twitter):
+def getRemainderOfCompanies(companies_Without_Twitter, updatedCompanyObjectList):
 	for company in companies_Without_Twitter:
 		if (findCompaniesWithSearch(company)):
+			updatedCompanyObjectList.append(company)
 			companies_Without_Twitter.remove(company)
 		else:
 			continue
@@ -111,13 +115,13 @@ def getRemainderOfCompanies(companies_Without_Twitter):
 
 
 	
-def getAllCompanies(companyList):
-	companiesNotFound = findCompanyTwitter(companyList)
+def getAllCompanies(companyList, updatedCompanyObjectList):
+	companiesNotFound = findCompanyTwitter(companyList, updatedCompanyObjectList)
 	print("Getting remainder companies")
-	companiesNotFound = getRemainderOfCompanies(companiesNotFound)
+	companiesNotFound = getRemainderOfCompanies(companiesNotFound, updatedCompanyObjectList)
 	if companiesNotFound:
 		return companiesNotFound
 	else:
 		return
 
-companyNotFoundList = getAllCompanies(companyList)
+companyNotFoundList = getAllCompanies(companyList, updatedCompanyObjectList)
