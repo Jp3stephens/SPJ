@@ -1,6 +1,15 @@
 HELLO AKSHIT!
 Test on Jack Branch
 
+IMPORTANT: FOR NOW I need to set export APP_SETTINGS="config.DevelopmentConfig"
+and 
+export DATABASE_URL="postgresql://localhost/Brocastle"
+
+everytime I run the server. runserver with : python3 manage.py runserver. Obviously this is not ideal. Need to fix in future. 
+
+
+
+
 Guidelines for how we are going to do this:
 
 
